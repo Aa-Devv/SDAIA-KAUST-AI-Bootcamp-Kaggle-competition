@@ -32,7 +32,6 @@ class DataSetWithTransforms(Dataset):
     def __getitem__(self, index):
         if self._feature_transforms is None:
             features = self._features[index]
-            # feature = torch.rashape(feature, (32,32,3))
         else:
             features = self._feature_transforms(self._features[index])
         target = self._target[index]
@@ -51,7 +50,6 @@ class DataSetTest(Dataset):
      def __getitem__(self, index):
          if self._feature_transforms is None:
              features = self._features[index]
-             # feature = torch.rashape(feature, (32,32,3))
          else:
              features = self._feature_transforms(self._features[index])
          return (features)
@@ -60,7 +58,7 @@ class DataSetTest(Dataset):
          n_samples, _ = self._features.shape
          return n_samples
 
-     # data augmentation should only apply to training data
+     
 _feature_transforms = transforms.Compose([
     transforms.Lambda(lambda array: array.reshape((32, 32))),
     transforms.ToPILImage(),
